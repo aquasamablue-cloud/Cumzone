@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Total Global</title>
+
+    <style>
+        body {
+            background-color: #333;
+            color: white;
+            font-family: Arial;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            padding: 20px;
+        }
+
+        .global-total {
+            width: 100%;
+            text-align: center;
+            font-size: 32px;
+            font-weight: bold;
+            background-color: #444;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .container {
+            width: 25%;
+            margin: 10px;
+            background-color: #444;
+            border-radius: 8px;
+            overflow: hidden;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+
+        .container img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+
+        .name, .num {
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        iframe {
+            display: none;
+            width: 0;
+            height: 0;
+            border: 0;
+        }
+
+        .nav {
+            width: 100%;
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .nav a {
+            background-color: #444;
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="global-total">
+        Total global : <span id="totalGlobal">0</span> 💦
+    </div>
+
+    <div id="content"></div>
+
+    <iframe id="page1" src="Rank.html"></iframe>
+    <iframe id="page2" src="Rank - Arisu.html"></iframe>
+
+<script>
+let loaded = 0;
+let pagesData = [];
+
+function extractFromIframe(id) {
+    const frame = document.getElementById(id);
+    const doc = frame.contentDocument;
+
+    const containers = doc.querySelectorAll('.container');
+    let list = [];
+
+    containers.forEach(c => {
+        let img = c.querySelector("img").getAttribute("src");
+        let name = c.querySelector(".name").textContent.trim();
+        let count = parseInt(c.querySelector(".num").textContent);
+
+        list.push({ img, name, count });
+    });
+
+    pagesData.push(...list);
+}
+
+function tryBuild() {
+    if (loaded < 2) return;
+
+    // afficher
+    const wrapper = document.getElementById("content");
+    let global = 0;
+
+    pagesData.forEach(p => {
+        global += p.count;
+        wrapper.innerHTML += `
+            <div class="container">
+                <img src="${p.img}">
+                <div class="num">${p.count} 💦</div>
+                <div class="name">${p.name}</div>
+            </div>
+        `;
+    });
+
+    document.getElementById("totalGlobal").textContent = global;
+}
+
+document.getElementById("page1").onload = () => {
+    extractFromIframe("page1");
+    loaded++;
+    tryBuild();
+};
+
+document.getElementById("page2").onload = () => {
+    extractFromIframe("page2");
+    loaded++;
+    tryBuild();
+};
+</script>
+
+<div class="nav">
+    <a href="Rank.html">Retour</a>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projet</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            background-color: #333333;
+            padding: 20px;
+        }
+		.total-container {
+            width: 100%;
+            text-align: center;
+            padding: 20px;
+            background-color: #444444;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+        }
+
+        .total-counter {
+            font-size: 32px;
+            font-weight: bold;
+            color: #FFFFFF;
+        }
+        .container {
+            width: 25%;
+            margin: 10px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+			background-color: #444444;
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+        .container:hover {
+            transform: scale(1.05);
+        }
+        img {
+			width: 500px;        /* Largeur fixe pour toutes les images */
+            height: 500px;       /* Hauteur fixe pour toutes les images */
+            object-fit: cover;   /* Remplir sans déformer l'image */
+            border-radius: 8px;  /* Coins arrondis */
+        }
+        .num {
+            font-size: 24px;
+            font-weight: bold;
+            color: #FFFFFF;
+            margin-top: 10px;
+        }
+        .name {
+            font-size: 22px;
+			font-weight: bold;
+            color: #000;
+        }
+		.nav-link {
+			width: 100%;
+			text-align: center;
+			margin-top: 40px; /* espace entre le bouton et la dernière image */
+		}
+
+		.nav-link a {
+			font-size: 20px;
+			color: #FFFFFF;
+			background-color: #444444;
+			padding: 10px 20px;
+			border-radius: 8px;
+			text-decoration: none;
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+			transition: background-color 0.3s;
+		}
+
+		.nav-link a:hover {
+			background-color: #666666;
+		}
+		.profile-box {
+			position: fixed;
+			top: 20px;
+			left: 20px;
+			background-color: #444444;
+			padding: 10px 15px;
+			border-radius: 10px;
+			display: flex;
+			align-items: center;
+			gap: 10px;
+			z-index: 10000;
+			box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+		}
+
+		.profile-pic {
+			width: 55px;
+			height: 55px;
+			object-fit: cover;
+			border-radius: 50%;
+		}
+
+		.profile-name {
+			font-size: 18px;
+			color: white;
+			font-weight: bold;
+		}
+
+    </style>
+</head>
+<body>
+	<div class="profile-box">
+		<img src="arisu.jpg" class="profile-pic">
+		<div class="profile-name">Arisu</div>
+	</div>
+
+	<div class="total-container">
+        <div class="total-counter">
+            Total : <span id="totalCount">0</span> 💦
+        </div>
+    </div>
+	
+
+    <div class="container">
+        <img src="alice.jpg" alt="Nom de la personne" class="image">
+        <div class="num">4 💦</div>
+        <div class="name">Alice Delish</div>
+    </div>
+    <div class="container">
+        <img src="Amouranth.jpg" alt="Nom de la personne" class="image">
+        <div class="num">3 💦</div>
+        <div class="name">Amouranth</div>
+    </div>
+    <div class="container">
+        <img src="Livvy.jpg" alt="Nom de la personne" class="image">
+        <div class="num">3 💦</div>
+        <div class="name">Livvy Dune</div>
+    </div>
+    <div class="container">
+        <img src="soogsx.jpg" alt="Nom de la personne" class="image">
+        <div class="num">2 💦</div>
+        <div class="name">Soogsx</div>
+    </div>
+	<div class="container">
+        <img src="Brooke.jpg" alt="Nom de la personne" class="image">
+        <div class="num">2 💦</div>
+        <div class="name">Brooke Monk</div>
+    </div>
+	<div class="container">
+        <img src="Sweetie.jpg" alt="Nom de la personne" class="image">
+        <div class="num">2 💦</div>
+        <div class="name">SweetieFox</div>
+    </div>
+	<div class="container">
+        <img src="Britney.jpg" alt="Nom de la personne" class="image">
+        <div class="num">2 💦</div>
+        <div class="name">Britney Amber</div>
+    </div>
+	<div class="container">
+        <img src="Waifumia.jpg" alt="Nom de la personne" class="image">
+        <div class="num">2 💦</div>
+        <div class="name">Waifumia</div>
+    </div>
+	<div class="container">
+        <img src="hannah.jpg" alt="Nom de la personne" class="image">
+        <div class="num">1 💦</div>
+        <div class="name">Hannah Owo</div>
+    </div>
+	<div class="container">
+        <img src="Belle.jpg" alt="Nom de la personne" class="image">
+        <div class="num">1 💦</div>
+        <div class="name">Belle Delphine</div>
+    </div>
+	<div class="container">
+        <img src="corinna.jpg" alt="Nom de la personne" class="image">
+        <div class="num">1 💦</div>
+        <div class="name">Corinna Kopf</div>
+    </div>
+	<div class="container">
+        <img src="Tinna.jpg" alt="Nom de la personne" class="image">
+        <div class="num">1 💦</div>
+        <div class="name">Tinna Angel</div>
+    </div>
+	<div class="container">
+        <img src="zackycha.jpg" alt="Nom de la personne" class="image">
+        <div class="num">1 💦</div>
+        <div class="name">Zackycha</div>
+    </div>
+	<div class="container">
+        <img src="morgpie.jpg" alt="Nom de la personne" class="image">
+        <div class="num">1 💦</div>
+        <div class="name">Morgpie</div>
+    </div>
+	<div class="container">
+        <img src="shawty.jpg" alt="Nom de la personne" class="image">
+        <div class="num">1 💦</div>
+        <div class="name">ShastyShaww</div>
+    </div>
+	<div class="container">
+        <img src="misbehaved.jpg" alt="Nom de la personne" class="image">
+        <div class="num">1 💦</div>
+        <div class="name">Misbehavedxoxo</div>
+    </div>
+	<div class="container">
+        <img src="riley.jpg" alt="Nom de la personne" class="image">
+        <div class="num">1 💦</div>
+        <div class="name">Riley Reid</div>
+    </div>
+	
+	
+	
+	
+	
+	
+	<script>
+        // Fonction pour calculer la somme des numéros
+        function updateTotal() {
+            const numElements = document.querySelectorAll('.num');
+            let total = 0;
+
+            // Parcours de chaque élément .num pour additionner les valeurs
+            numElements.forEach(function(element) {
+                const value = parseInt(element.textContent); // Récupérer le nombre
+                total += value;
+            });
+
+            // Affichage de la somme dans l'élément #totalCount
+            document.getElementById('totalCount').textContent = total;
+        }
+
+        // Appel de la fonction pour mettre à jour le compteur au chargement de la page
+        window.onload = updateTotal;
+    </script>
+	
+	
+	
+	
+	<div class="nav-link">
+        <a href="Rank.html">Aqua</a>
+    </div>
+	
+	
+	
+	
+	
+	
+	
+</body>
+</html>
