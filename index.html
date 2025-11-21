@@ -27,28 +27,26 @@
         margin-bottom: 20px;
     }
 
-    .container {
-        width: 25%;
-        margin: 10px;
-        text-align: center;
-        background-color: #444;
-        border-radius: 8px;
-        overflow: hidden;
-        transition: transform 0.3s ease;
-        box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+	.container {
+            width: 25%;
+            margin: 10px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+			background-color: #444444;
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     }
-
     .container:hover {
         transform: scale(1.05);
     }
-
     img {
-        width: 500px;
-        height: 500px;
-        object-fit: cover;
-        border-radius: 8px;
+		width: 500px;        /* Largeur fixe pour toutes les images */
+        height: 500px;       /* Hauteur fixe pour toutes les images */
+        object-fit: cover;   /* Remplir sans déformer l'image */
+        border-radius: 8px;  /* Coins arrondis */
     }
-
     .num {
         font-size: 24px;
         font-weight: bold;
@@ -66,70 +64,71 @@
 </head>
 <body>
 
-<div class="global-total">
-    Total global : <span id="totalGlobal">0</span> 💦
-</div>
+	<div class="global-total">
+		Total global : <span id="totalGlobal">0</span> 💦
+	</div>
 
-<div id="content"></div>
+	<div id="content"></div>
 
-<script>
-async function loadAllRanks() {
-    const files = [
-        "Rank.html",
-        "Rank-Arisu.html"
-        // Ajoute ici si tu as d'autres pages
-    ];
+	<script>
+	async function loadAllRanks() {
+		// ⚠️ IMPORTANT : noms exacts des fichiers (sans espace)
+		const files = [
+			"Rank.html",
+			"Rank-Arisu.html"
+			// ajoute ici d’autres pages si tu veux
+		];
 
-    let map = {}; // fusion automatique
-    let total = 0;
+		let map = {}; // pour fusionner + additionner
+		let total = 0;
 
-    for (const file of files) {
-        try {
-            const response = await fetch(file);
-            const text = await response.text();
-            const doc = new DOMParser().parseFromString(text, "text/html");
+		for (const file of files) {
+			try {
+				const response = await fetch(file);
+				const text = await response.text();
+				const doc = new DOMParser().parseFromString(text, "text/html");
 
-            const containers = doc.querySelectorAll(".container");
+				const containers = doc.querySelectorAll(".container");
 
-            containers.forEach(c => {
-                const img = c.querySelector("img").getAttribute("src");
-                const name = c.querySelector(".name").textContent.trim();
-                const num = parseInt(c.querySelector(".num").textContent);
+				containers.forEach(c => {
+					const img = c.querySelector("img").getAttribute("src");
+					const name = c.querySelector(".name").textContent.trim();
+					const num = parseInt(c.querySelector(".num").textContent);
 
-                if (!map[name]) {
-                    map[name] = { name, img, count: num };
-                } else {
-                    map[name].count += num; // fusion doublon
-                }
-            });
+					if (!map[name]) {
+						map[name] = { name, img, count: num };
+					} else {
+						map[name].count += num;  // 👍 addition correcte
+					}
+				});
 
-        } catch (err) {
-            console.log("Erreur sur", file, err);
-        }
-    }
+			} catch (err) {
+				console.error("Erreur de chargement :", file, err);
+			}
+		}
 
-    // Convertir en liste + tri
-    const finalList = Object.values(map).sort((a, b) => b.count - a.count);
+		// Convertir en tableau + tri décroissant
+		const finalList = Object.values(map).sort((a, b) => b.count - a.count);
 
-    const content = document.getElementById("content");
+		const content = document.getElementById("content");
 
-    finalList.forEach(p => {
-        total += p.count;
+		finalList.forEach(p => {
+			total += p.count;
 
-        content.innerHTML += `
-            <div class="container">
-                <img src="${p.img}">
-                <div class="num">${p.count} 💦</div>
-                <div class="name">${p.name}</div>
-            </div>
-        `;
-    });
+			content.innerHTML += `
+				<div class="container">
+					<img src="${p.img}">
+					<div class="num">${p.count} 💦</div>
+					<div class="name">${p.name}</div>
+				</div>
+			`;
+		});
 
-    document.getElementById("totalGlobal").textContent = total;
-}
+		document.getElementById("totalGlobal").textContent = total;
+	}
 
-loadAllRanks();
-</script>
+	loadAllRanks();
+	</script>
 
 </body>
 </html>
