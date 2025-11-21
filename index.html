@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Total Global Auto</title>
+<title>Total Global Fusionné</title>
 
 <style>
     body {
@@ -30,25 +30,39 @@
     .container {
         width: 25%;
         margin: 10px;
+        text-align: center;
         background-color: #444;
         border-radius: 8px;
         overflow: hidden;
-        text-align: center;
+        transition: transform 0.3s ease;
         box-shadow: 0 4px 8px rgba(0,0,0,0.3);
     }
 
-    .container img {
-        width: 100%;
-        height: 300px;
-        object-fit: cover;
+    .container:hover {
+        transform: scale(1.05);
     }
 
-    .name, .num {
+    img {
+        width: 500px;
+        height: 500px;
+        object-fit: cover;
+        border-radius: 8px;
+    }
+
+    .num {
+        font-size: 24px;
         font-weight: bold;
-        margin: 10px 0;
+        color: #FFFFFF;
+        margin-top: 10px;
+    }
+
+    .name {
+        font-size: 22px;
+        font-weight: bold;
+        color: #000;
+        margin-bottom: 10px;
     }
 </style>
-
 </head>
 <body>
 
@@ -58,52 +72,4 @@
 
 <div id="content"></div>
 
-<script>
-async function loadAllRanks() {
-    const files = [
-        "Rank.html",
-        "Rank - Arisu.html"
-        // Tu peux en ajouter ici si tu veux
-        // ou je te fais une version 100% automatique avec scan du dossier
-    ];
-
-    let total = 0;
-    const content = document.getElementById("content");
-
-    for (const file of files) {
-        try {
-            const response = await fetch(file);
-            const text = await response.text();
-
-            const doc = new DOMParser().parseFromString(text, "text/html");
-            const containers = doc.querySelectorAll(".container");
-
-            containers.forEach(c => {
-                const img = c.querySelector("img").getAttribute("src");
-                const name = c.querySelector(".name")?.textContent.trim() || "???";
-                const num = parseInt(c.querySelector(".num").textContent);
-
-                total += num;
-
-                content.innerHTML += `
-                    <div class="container">
-                        <img src="${img}">
-                        <div class="num">${num} 💦</div>
-                        <div class="name">${name}</div>
-                    </div>
-                `;
-            });
-
-        } catch (e) {
-            console.error("Erreur chargement", file, e);
-        }
-    }
-
-    document.getElementById("totalGlobal").textContent = total;
-}
-
-loadAllRanks();
-</script>
-
-</body>
-</html>
+<script
